@@ -1,6 +1,11 @@
 <div class="product-content">
   <div class="product-img">
-    <app-img *ngIf="product.images.length" [img]="product.images[0]"></app-img>
+    <a [routerLink]="['/product', product.id]">
+      <app-img
+        *ngIf="product.images.length"
+        [img]="product.images[0]"
+      ></app-img>
+    </a>
   </div>
   <p class="product-price">{{ product.price | currency : "PEN" }}</p>
   <p class="product-price">

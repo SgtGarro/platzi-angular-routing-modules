@@ -1,1 +1,33 @@
-<p>product-detail works!</p>
+<div class="page-product container">
+  <div class="detail" *ngIf="product">
+    <button (click)="goToBack()" type="button" class="close-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="{1.5}"
+        stroke="currentColor"
+        className="w-6 h-6"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+    <div class="gallery">
+      <swiper [slidesPerView]="1">
+        <ng-template swiperSlide *ngFor="let img of product?.images"
+          ><img [src]="img" alt="An img" />
+        </ng-template>
+      </swiper>
+    </div>
+    <div class="product-content">
+      <p class="product-title">{{ product.title }}</p>
+      <p class="product-price">Price: {{ product.price | currency : "PEN" }}</p>
+      <p class="product-description">{{ product.description }}</p>
+    </div>
+  </div>
+</div>
+<swiper></swiper>
