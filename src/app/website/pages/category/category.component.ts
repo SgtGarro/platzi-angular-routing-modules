@@ -10,6 +10,7 @@ import { ProductsService } from 'src/app/services/products.service';
     <app-products
       [productsList]="productsList"
       (loadMore)="onLoadMore()"
+      [productId]="productId"
     ></app-products>
   </div>`,
   styleUrls: ['./category.component.css'],
@@ -20,6 +21,7 @@ export class CategoryComponent implements OnInit {
   private offset: number;
 
   public productsList: Product[];
+  public productId: string | null;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +32,7 @@ export class CategoryComponent implements OnInit {
     this.offset = 0;
 
     this.productsList = [];
+    this.productId = null;
   }
 
   ngOnInit(): void {
@@ -52,6 +55,11 @@ export class CategoryComponent implements OnInit {
         this.productsList = data;
         this.offset += this.limit;
       });
+
+    this.route.queryParamMap.subscribe((param) => {
+      this.productId = param.get('product');
+      console.log(this.productId);
+    });
   }
 
   onLoadMore() {

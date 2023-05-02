@@ -13,6 +13,6 @@
   </p>
   <p class="product-title">{{ product.title | uppercase }}</p>
   <p appHighlight class="product-description">{{ product.description }}</p>
-  <button (click)="onShowDetail()">View details</button>
+  <a routerLink="." [queryParams]="{ product: product.id }"> View details </a>
   <button (click)="onAddToCart()">Add</button>
 </div>
