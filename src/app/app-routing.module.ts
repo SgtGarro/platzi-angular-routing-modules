@@ -1,28 +1,16 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ProductComponent } from './website/components/product/product.component';
-import { CategoryComponent } from './website/pages/category/category.component';
-import { HomeComponent } from './website/pages/home/home.component';
-import { NotFoundComponent } from './website/pages/not-found/not-found.component';
-import { ProductDetailComponent } from './website/pages/product-detail/product-detail.component';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full',
+    path: 'website',
+    loadChildren: () =>
+      import('./website/website.module').then((m) => m.WebsiteModule),
   },
   {
-    path: 'home',
-    component: HomeComponent,
-  },
-  {
-    path: 'category/:id',
-    component: CategoryComponent,
-  },
-  {
-    path: 'product/:id',
-    component: ProductDetailComponent,
+    path: 'cms',
+    loadChildren: () => import('./cms/cms.module').then((m) => m.CmsModule),
   },
   {
     path: '**',
@@ -31,7 +19,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

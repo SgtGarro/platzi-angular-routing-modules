@@ -35,7 +35,7 @@
       <ul class="nav-list">
         <li class="nav-list-item"><a routerLink="home">All</a></li>
         <li class="nav-list-item" *ngFor="let category of categoriesList">
-          <a [routerLink]="['/category', category.id]">{{ category.name }}</a>
+          <a [routerLink]="['category', category.id]">{{ category.name }}</a>
         </li>
       </ul>
     </div>
@@ -46,14 +46,12 @@
     </a>
     <ul class="nav-list">
       <li class="nav-list-item">
-        <a routerLinkActive="active" routerLink="/home">All</a>
+        <a routerLinkActive="active" routerLink="home">All</a>
       </li>
       <li class="nav-list-item" *ngFor="let category of categoriesList">
-        <a
-          routerLinkActive="active"
-          [routerLink]="['/category', category.id]"
-          >{{ category.name }}</a
-        >
+        <a routerLinkActive="active" [routerLink]="['category', category.id]">{{
+          category.name
+        }}</a>
       </li>
     </ul>
     <div class="profile">

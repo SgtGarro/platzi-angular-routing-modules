@@ -5,7 +5,7 @@ import { FilesService } from './services/files.service';
 import { UsersService } from './services/users.service';
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: '<router-outlet />',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
