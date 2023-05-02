@@ -1,0 +1,43 @@
+.error-display {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 64px);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 4.4rem;
+  text-align: center;
+}
+
+.error {
+  font-size: 6.4rem;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #343a40;
+}
+
+.error-message {
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: #868e96;
+}
+
+.error-link {
+  color: var(--hospital-green);
+}
+
+.error-gif {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.error-gif img {
+  width: inherit;
+  height: inherit;
+
+  object-fit: cover;
+  object-position: center;
+}
