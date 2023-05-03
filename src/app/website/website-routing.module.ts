@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from '../guards/auth.guard';
 import { LayoutComponent } from './components/layout/layout.component';
-import { CategoryComponent } from './pages/category/category.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+      },
+      {
+        path: 'profile',
+        canActivate: [AuthGuard],
+        component: ProfileComponent,
       },
       {
         path: 'category',

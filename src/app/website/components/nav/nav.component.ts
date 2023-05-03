@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { Category } from 'src/app/model/category.model';
 import { User } from 'src/app/model/user.model';
@@ -22,7 +23,8 @@ export class NavComponent implements OnInit {
   constructor(
     private storeService: StoreService,
     private authService: AuthService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router
   ) {
     this.isShownSidebar = false;
     this.counter = 0;
@@ -44,7 +46,7 @@ export class NavComponent implements OnInit {
   }
 
   public login() {
-    this.authService.login('sebas123@gmail.com', '12345').subscribe({
+    this.authService.login('maria@mail.com', '12345').subscribe({
       next: (token) => {
         this.token = token.access_token;
       },
@@ -52,7 +54,7 @@ export class NavComponent implements OnInit {
   }
 
   public getProfile() {
-    this.authService.profile()?.subscribe((profile) => {
+    this.authService.profile()!.subscribe((profile) => {
       console.log(profile);
       this.user = profile;
     });
@@ -60,7 +62,7 @@ export class NavComponent implements OnInit {
 
   public loginAndGetProfile() {
     this.authService
-      .login('sebas123@gmail.com', '12345')
+      .login('maria@mail.com', '12345')
       .pipe(
         switchMap((token) => {
           this.token = token.access_token;
@@ -76,5 +78,12 @@ export class NavComponent implements OnInit {
     this.categoryService
       .getAllCategories()
       .subscribe((data) => (this.categoriesList = data));
+  }
+
+  public logout() {
+    this.authService.logout();
+    this.user = null;
+    this.token = '';
+    this.router.navigate(['/home']);
   }
 }

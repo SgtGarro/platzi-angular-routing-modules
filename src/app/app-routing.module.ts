@@ -6,7 +6,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: 'website',
+    path: '',
     loadChildren: () =>
       import('./website/website.module').then((m) => m.WebsiteModule),
     data: {

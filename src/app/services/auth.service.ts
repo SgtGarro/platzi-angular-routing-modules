@@ -26,6 +26,7 @@ export class AuthService {
   profile() {
     const token = localStorage.getItem('token');
     if (!token) return;
+
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.http.get<User>(`${this.API_URL}/profile`, { headers });
@@ -40,5 +41,9 @@ export class AuthService {
 
   fetchLoginAndProfile(email: string, password: string) {
     return this.login(email, password).pipe(switchMap(() => this.profile()!));
+  }
+
+  logout() {
+    this.tokenService.removeToken();
   }
 }

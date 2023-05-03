@@ -62,7 +62,10 @@
         >
           Login
         </button>
-        <ng-template #profileEmail>{{ user?.email }}</ng-template>
+        <ng-template #profileEmail>
+          <a routerLink="/profile">{{ user?.email }}</a>
+          <button (click)="logout()" type="button">Logout</button>
+        </ng-template>
       </div>
       <button class="navbar-btn" type="button">
         <img

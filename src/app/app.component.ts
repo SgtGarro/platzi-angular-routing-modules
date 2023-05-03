@@ -25,6 +25,7 @@ export class AppComponent {
       name: 'example',
       email: 'example@mail.com',
       password: '12345',
+      role: 'customer',
     };
     this.imgRta = '';
   }
@@ -35,6 +36,7 @@ export class AppComponent {
         name: 'Sebas',
         email: 'sebas123@gmail.com',
         password: '12345',
+        role: 'customer',
       })
       .subscribe({
         next: (user) => console.log(user),
