@@ -39,6 +39,10 @@ export class NavComponent implements OnInit {
     });
 
     this.getAllCategories();
+
+    this.authService.user$.subscribe((data) => {
+      this.user = data;
+    });
   }
 
   toggleSidebar() {
@@ -46,10 +50,8 @@ export class NavComponent implements OnInit {
   }
 
   public login() {
-    this.authService.login('maria@mail.com', '12345').subscribe({
-      next: (token) => {
-        this.token = token.access_token;
-      },
+    this.authService.login('maria@mail.com', '12345').subscribe(() => {
+      this.router.navigate(['/profile']);
     });
   }
 

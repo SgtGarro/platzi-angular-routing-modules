@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from './model/user.model';
 import { AuthService } from './services/auth.service';
 import { FilesService } from './services/files.service';
 import { UsersService } from './services/users.service';
+
+import { TokenService } from './services/token.service';
 @Component({
   selector: 'app-root',
   template: '<router-outlet />',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public title = 'my-store';
   public token: string;
   public user: User;
@@ -17,7 +19,8 @@ export class AppComponent {
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
-    private filesService: FilesService
+    private filesService: FilesService,
+    private tokenService: TokenService
   ) {
     this.token = '';
     this.user = {
@@ -28,6 +31,13 @@ export class AppComponent {
       role: 'customer',
     };
     this.imgRta = '';
+  }
+  ngOnInit(): void {
+    const token = this.tokenService.getToken();
+
+    if (!token) return;
+
+    this.authService.profile()?.subscribe();
   }
 
   public createUser() {
