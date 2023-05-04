@@ -41,6 +41,7 @@ export class NavComponent implements OnInit {
     this.getAllCategories();
 
     this.authService.user$.subscribe((data) => {
+      console.log('nav', data);
       this.user = data;
     });
   }
@@ -50,7 +51,7 @@ export class NavComponent implements OnInit {
   }
 
   public login() {
-    this.authService.login('maria@mail.com', '12345').subscribe(() => {
+    this.authService.login('admin@mail.com', 'admin123').subscribe(() => {
       this.router.navigate(['/profile']);
     });
   }
@@ -64,7 +65,7 @@ export class NavComponent implements OnInit {
 
   public loginAndGetProfile() {
     this.authService
-      .login('maria@mail.com', '12345')
+      .login('admin@mail.com', 'admin123')
       .pipe(
         switchMap((token) => {
           this.token = token.access_token;

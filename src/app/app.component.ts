@@ -34,10 +34,13 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     const token = this.tokenService.getToken();
+    console.log(token);
 
     if (!token) return;
 
-    this.authService.profile()?.subscribe();
+    this.authService.profile()?.subscribe((data) => {
+      console.log(data);
+    });
   }
 
   public createUser() {

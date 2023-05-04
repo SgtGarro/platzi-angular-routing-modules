@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../guards/auth.guard';
+import { ExitGuard } from '../guards/exit.guard';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,11 @@ const routes: Routes = [
           import('./pages/category/category.module').then(
             (m) => m.CategoryModule
           ),
+      },
+      {
+        path: 'register',
+        canDeactivate: [ExitGuard],
+        component: RegisterComponent,
       },
       {
         path: 'product/:id',

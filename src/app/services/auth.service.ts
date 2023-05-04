@@ -10,7 +10,7 @@ import { TokenService } from './token.service';
 })
 export class AuthService {
   private API_URL: string;
-  private user: BehaviorSubject<User | null>;
+  public user: BehaviorSubject<User | null>;
 
   public user$: Observable<User | null>;
 
@@ -31,13 +31,19 @@ export class AuthService {
 
   profile() {
     const token = localStorage.getItem('token');
+
     if (!token) return;
+
+    console.log('success');
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http
-      .get<User>(`${this.API_URL}/profile`, { headers })
-      .pipe(tap((user) => this.user.next(user)));
+    return this.http.get<User>(`${this.API_URL}/profile`, { headers }).pipe(
+      tap((data) => {
+        this.user.next(data);
+        console.log('data', this.user);
+      })
+    );
   }
   /* profile(token: string) {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
